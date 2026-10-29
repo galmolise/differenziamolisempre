@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Editor locale dei dati comunali di differenziamolisempre">
+  <title>Editor dati · differenziamolisempre</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="dati-iniziali.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Sezioni editor">
+      <div class="brand">
+        <div class="brand-identity">
+          <div class="wordmark" role="img" aria-label="differenziamolisempre">
+            <span class="brand-yellow" aria-hidden="true">diffe</span><span class="brand-earth" aria-hidden="true">ren</span><span class="brand-blue" aria-hidden="true">zia</span><span class="brand-molise" aria-hidden="true"><span>m</span><svg class="recycle-o" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true" focusable="false"><path d="M174.7 45.1C192.2 17 223 0 256 0s63.8 17 81.3 45.1l38.6 61.7 27-15.6c8.4-4.9 18.9-4.2 26.6 1.7s11.1 15.9 8.6 25.3l-23.4 87.4c-3.4 12.8-16.6 20.4-29.4 17l-87.4-23.4c-9.4-2.5-16.3-10.4-17.6-20s3.4-19.1 11.8-23.9l28.4-16.4L283 79c-5.8-9.3-16-15-27-15s-21.2 5.7-27 15l-17.5 28c-9.2 14.8-28.6 19.5-43.6 10.5c-15.3-9.2-20.2-29.2-10.7-44.4l17.5-28zM429.5 251.9c15-9 34.4-4.3 43.6 10.5l24.4 39.1c9.4 15.1 14.4 32.4 14.6 50.2c.3 53.1-42.7 96.4-95.8 96.4L320 448l0 32c0 9.7-5.8 18.5-14.8 22.2s-19.3 1.7-26.2-5.2l-64-64c-9.4-9.4-9.4-24.6 0-33.9l64-64c6.9-6.9 17.2-8.9 26.2-5.2s14.8 12.5 14.8 22.2l0 32 96.2 0c17.6 0 31.9-14.4 31.8-32c0-5.9-1.7-11.7-4.8-16.7l-24.4-39.1c-9.5-15.2-4.7-35.2 10.7-44.4zm-364.6-31L36 204.2c-8.4-4.9-13.1-14.3-11.8-23.9s8.2-17.5 17.6-20l87.4-23.4c12.8-3.4 26 4.2 29.4 17L182 241.2c2.5 9.4-.9 19.3-8.6 25.3s-18.2 6.6-26.6 1.7l-26.5-15.3L68.8 335.3c-3.1 5-4.8 10.8-4.8 16.7c-.1 17.6 14.2 32 31.8 32l32.2 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-32.2 0C42.7 448-.3 404.8 0 351.6c.1-17.8 5.1-35.1 14.6-50.2l50.3-80.5z"/></svg><span>lise</span></span><span class="brand-slate" aria-hidden="true">mpre</span>
+          </div>
+          <div class="brand-subtitle">Editor contenuti · versione 1.2</div>
+        </div>
+      </div>
+      <div class="municipality">
+        <span class="eyebrow">COMUNE ATTIVO</span>
+        <select id="city-select" class="city-select" aria-label="Comune da modificare"><option value="pietracatella">Pietracatella</option></select>
+        <span class="municipality-caption" id="municipality-caption">Molise · CB</span>
+      </div>
+      <div class="nav-label">CONTENUTI</div>
+      <nav id="navigation" class="navigation">
+        <button class="nav-link active" data-section="panoramica"><span class="nav-emoji" aria-hidden="true">▦</span><span>Panoramica</span></button>
+        <button class="nav-link" data-section="calendario"><span class="nav-emoji" aria-hidden="true">▣</span><span>Calendario</span></button>
+        <button class="nav-link" data-section="dizionario"><span class="nav-emoji" aria-hidden="true">▤</span><span>Dizionario</span><span class="nav-count" id="nav-dictionary">438</span></button>
+        <button class="nav-link" data-section="guida"><span class="nav-emoji" aria-hidden="true">▧</span><span>Guida</span></button>
+        <button class="nav-link" data-section="consigli"><span class="nav-emoji" aria-hidden="true">✦</span><span>Consigli utili</span></button>
+        <button class="nav-link" data-section="servizi"><span class="nav-emoji" aria-hidden="true">⌂</span><span>Servizi comunali</span></button>
+        <button class="nav-link" data-section="riconoscimento"><span class="nav-emoji" aria-hidden="true">◉</span><span>Riconoscimento</span></button>
+      </nav>
+      <div class="nav-label">STRUMENTI</div>
+      <nav class="navigation">
+        <button class="nav-link" data-section="avanzate"><span class="nav-emoji" aria-hidden="true">⚙</span><span>Campi avanzati</span></button>
+        <button class="nav-link" data-section="controlli"><span class="nav-emoji" aria-hidden="true">✓</span><span>Validazione</span></button>
+      </nav>
+      <div class="sidebar-bottom"><div class="dot"></div><span>Funziona nel browser · nessun account richiesto</span></div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <button id="menu-button" class="icon-button mobile-menu" aria-label="Mostra navigazione">☰</button>
+        <div class="breadcrumbs"><span id="breadcrumb-city">Pietracatella</span><span class="breadcrumb-sep">/</span><strong id="breadcrumb-current">Panoramica</strong></div>
+        <div class="topbar-actions">
+          <span id="dirty-indicator" class="state-chip">Nessuna modifica</span>
+          <button id="undo-button" class="button button-quiet" title="Annulla ultima modifica" disabled>↶ <span class="desktop-label">Annulla</span></button>
+          <button id="redo-button" class="button button-quiet" title="Ripristina modifica" disabled>↷ <span class="desktop-label">Ripristina</span></button>
+        </div>
+      </header>
+      <div id="alert-area" class="alert-area" role="status" aria-live="polite"></div>
+      <main id="main" class="main"></main>
+      <footer class="footer"><span>Editor statico · Le modifiche restano nel browser finché non esporti il file</span><span id="footer-revision">schema 3</span></footer>
+    </div>
+  </div>
+  <dialog id="confirmation-dialog" class="confirm-dialog" aria-labelledby="dialog-title">
+    <form method="dialog"><h2 id="dialog-title">Conferma</h2><p id="dialog-message"></p><div class="dialog-actions"><button value="cancel" class="button button-secondary">Annulla</button><button value="confirm" class="button button-danger">Conferma</button></div></form>
+  </dialog>
+  <input type="file" accept=".json,application/json" id="file-input" hidden>
+</body>
+</html>

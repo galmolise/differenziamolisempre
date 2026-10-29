@@ -1,0 +1,9 @@
+{
+  "comuni": [
+    {
+      "id": "pietracatella",
+      "nome": "Pietracatella",
+      "file": "comuni/pietracatella/dati.json"
+    }
+  ]
+}
