@@ -1,5 +1,7 @@
 # differenziamolisempre · Gestione dati comunali
 
+**Editor v1.4 — procedura guidata per esportazione JSON:** aggiunta funzionalità per guidare l'utente nello scaricamento e nella pubblicazione del JSON aggiornato.
+
 **Editor v1.3 — implementazione dati moduli:** aggiunti campi per testi relativi ai moduli "Ritiro" e "Segnalazione".
 
 **Editor v1.2 — correzione logo:** simbolo del riciclo regolare e correttamente proporzionato nell’intestazione del pannello. Nessun cambiamento ai dati o alle funzionalità.
