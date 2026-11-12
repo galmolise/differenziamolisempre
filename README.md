@@ -1,5 +1,7 @@
 # differenziamolisempre · Gestione dati comunali
 
+**Editor v1.3 — implementazione dati moduli:** aggiunti campi per testi relativi ai moduli "Ritiro" e "Segnalazione".
+
 **Editor v1.2 — correzione logo:** simbolo del riciclo regolare e correttamente proporzionato nell’intestazione del pannello. Nessun cambiamento ai dati o alle funzionalità.
 
 **Editor v1.1 — aggiornamento grafico:** intestazione con la palette del marchio differenziamolisempre, «molise» in evidenza e simbolo del riciclo al posto della lettera «o». Nessuna modifica ai dati o alle funzioni di editing rispetto alla v1.0.
