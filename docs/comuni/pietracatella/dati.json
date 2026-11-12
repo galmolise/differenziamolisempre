@@ -1,6 +1,7 @@
 {
   "schema_version": 3,
-  "data_version": "0.9-FASE7A-FIX4-COMPONENTI_QR",
+  "data_version": "1.0-REV2-CALENDARIO-DIZIONARIO-MODULI",
+  "data_revision": 2,
   "status": "dati_confermati_per_uso_nell_app_secondo_indicazione_comunale",
   "comune": {
     "nome": "Pietracatella",
@@ -127,17 +128,17 @@
       },
       "domestica_fuori_centro": {
         "mon": [],
-        "tue": [
-          "carta",
-          "plastica_metalli",
-          "vetro"
-        ],
+        "tue": [],
         "wed": [],
-        "thu": [],
-        "fri": [
+        "thu": [
+          "carta",
+          "vetro",
           "secco"
         ],
-        "sat": [],
+        "fri": [],
+        "sat": [
+          "plastica_metalli"
+        ],
         "sun": []
       }
     },
@@ -2170,7 +2171,7 @@
       },
       {
         "id": "r0133",
-        "nome_fonte": "Cozze (gusci)",
+        "nome_fonte": "Cozze e vongole (gusci)",
         "destinazione_fonte": "Secco Residuo (indifferenziato)",
         "destinazione_id": "secco",
         "colore_mastello_fonte": "GRIGIO",
@@ -3093,7 +3094,7 @@
       },
       {
         "id": "r0204",
-        "nome_fonte": "Gusci di cozze e vongole",
+        "nome_fonte": "Cozze e vongole (senza gusci)",
         "destinazione_fonte": "Umido",
         "destinazione_id": "umido",
         "colore_mastello_fonte": "MARRONE",
@@ -6082,19 +6083,6 @@
         "stato": "trascritto_da_guida_da_verificare"
       },
       {
-        "id": "r0434",
-        "nome_fonte": "Vongole (gusci)",
-        "destinazione_fonte": "Umido",
-        "destinazione_id": "umido",
-        "colore_mastello_fonte": "MARRONE",
-        "sinonimi": [],
-        "fonte": {
-          "id": "guida_2016",
-          "pagina_pdf": 41
-        },
-        "stato": "trascritto_da_guida_da_verificare"
-      },
-      {
         "id": "r0435",
         "nome_fonte": "Zaini",
         "destinazione_fonte": "Secco Residuo (indifferenziato)",
@@ -6147,7 +6135,7 @@
         "stato": "trascritto_da_guida_da_verificare"
       }
     ],
-    "totale_voci": 438,
+    "totale_voci": 437,
     "pagine_pdf": [
       26,
       41
@@ -6156,7 +6144,7 @@
       "sinonimi",
       "normalizzazione"
     ],
-    "note": "Le 438 righe sono state estratte dal documento senza sostituire le destinazioni; verifica comunale necessaria, soprattutto sui casi contestati."
+    "note": "Le 438 righe originali sono state estratte dal documento; 437 voci dopo l’accorpamento dei gusci di cozze e vongole e la distinzione dalla parte senza gusci, secondo indicazione comunale. Le altre voci trascritte richiedono verifica puntuale."
   },
   "consigli": {
     "voci": [
@@ -6239,6 +6227,8 @@
         "verificato": true
       }
     ],
+    "istruzioni_modulo_ritiro": "Selezionare la categoria di servizio “Ambiente”; per il ritiro di materiali ingombranti, selezionare il servizio “Raccolta rifiuti ingombranti non pericolosi”; per il ritiro di rifiuti elettronici, selezionare il servizio “Raccolta rifiuti elettronici”.",
+    "istruzioni_modulo_segnalazione": "Selezionare la categoria di servizio “Ambiente”; per segnalare un mancato ritiro, selezionare il servizio “Segnalazione disservizio”; per segnalare l’abbandono di rifiuti, selezionare il servizio “Segnalazione abbandono rifiuti”.",
     "ritiro_ingombranti": {
       "cadenza": "ultimo_sabato_del_mese",
       "prenotazione_necessaria": true,
@@ -6597,6 +6587,5 @@
         "categoria_id": "vetro"
       }
     ]
-  },
-  "data_revision": 1
+  }
 }
