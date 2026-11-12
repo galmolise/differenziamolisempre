@@ -5,7 +5,7 @@
   const DAYS = [['mon','Lunedì'],['tue','Martedì'],['wed','Mercoledì'],['thu','Giovedì'],['fri','Venerdì'],['sat','Sabato'],['sun','Domenica']];
   const SECTION_TITLES = {panoramica:'Panoramica',calendario:'Calendario',dizionario:'Dizionario',guida:'Guida alla differenziata',consigli:'Consigli utili',servizi:'Servizi comunali',riconoscimento:'Riconoscimento',avanzate:'Campi avanzati',controlli:'Validazione'};
   const LABELS = {
-    id:'Identificativo',nome:'Nome',nome_fonte:'Nome del rifiuto',nome_prodotto:'Prodotto',titolo:'Titolo',testo_fonte:'Testo del consiglio',icona:'Icona SF Symbols (facoltativa)',pagina_pdf:'Pagina del documento',stato:'Stato',verificato:'Confermato',destinazione_fonte:'Destinazione indicata',destinazione_id:'Identificativo destinazione',colore_mastello_fonte:'Colore del mastello',sinonimi:'Sinonimi',materiale:'Materiale',codice:'Codice ambientale',termine:'Termine riconosciuto',categoria_id:'Frazione di raccolta',descrizione:'Descrizione',indicazione_fonte:'Indicazioni',come_si_raccoglie_fonte:'Come si raccoglie',cosa_si:'Cosa conferire',cosa_no:'Cosa non conferire',ricorda:'Ricorda',altre_destinazioni:'Altre destinazioni',telefono:'Telefono',zona:'Località',indirizzo_navigazione:'Indirizzo per navigazione',latitudine:'Latitudine',longitudine:'Longitudine',giorni:'Giorni di apertura',dalle:'Dalle',alle:'Alle',cadenza:'Frequenza',prenotazione_necessaria:'Prenotazione necessaria',informazioni:'Informazioni',note:'Note',nota:'Nota',quando:'Quando',come:'Come',luogo:'Dove',data_version:'Versione descrittiva',schema_version:'Versione dello schema',data_revision:'Revisione dati (numerica)',identificativo:'Identificativo del Comune',provincia:'Provincia',regione:'Regione',colore_mastello:'Colore mastello',colore_ui_provvisorio:'Colore UI',nome:'Nome',modalita_conferimento:'Modalità di conferimento',descrizione_onboarding:'Descrizione onboarding',totale_voci:'Totale voci',fonte:'Fonte',pagine_pdf:'Pagine PDF',inizio_ora:'Ora inizio',fine_ora:'Ora fine',tipologia:'Tipologia',periodicita:'Periodicità',giorni_riferiti_a:'Giorni riferiti a',cambio_profilo:'Cambio utenza',validita_verificata:'Validità confermata',giorni_di_ritiro:'Giorni di ritiro',comune:'Comune'
+    id:'Identificativo',nome:'Nome',nome_fonte:'Nome del rifiuto',nome_prodotto:'Prodotto',titolo:'Titolo',testo_fonte:'Testo del consiglio',icona:'Icona SF Symbols (facoltativa)',pagina_pdf:'Pagina del documento',stato:'Stato',verificato:'Confermato',destinazione_fonte:'Destinazione indicata',destinazione_id:'Identificativo destinazione',colore_mastello_fonte:'Colore del mastello',sinonimi:'Sinonimi',materiale:'Materiale',codice:'Codice ambientale',termine:'Termine riconosciuto',categoria_id:'Frazione di raccolta',descrizione:'Descrizione',indicazione_fonte:'Indicazioni',come_si_raccoglie_fonte:'Come si raccoglie',cosa_si:'Cosa conferire',cosa_no:'Cosa non conferire',ricorda:'Ricorda',altre_destinazioni:'Altre destinazioni',telefono:'Telefono',zona:'Località',indirizzo_navigazione:'Indirizzo per navigazione',latitudine:'Latitudine',longitudine:'Longitudine',giorni:'Giorni di apertura',dalle:'Dalle',alle:'Alle',cadenza:'Frequenza',prenotazione_necessaria:'Prenotazione necessaria',informazioni:'Informazioni',istruzioni_modulo_ritiro:'Istruzioni modulo Ritiro',istruzioni_modulo_segnalazione:'Istruzioni modulo Segnalazione',note:'Note',nota:'Nota',quando:'Quando',come:'Come',luogo:'Dove',data_version:'Versione descrittiva',schema_version:'Versione dello schema',data_revision:'Revisione dati (numerica)',identificativo:'Identificativo del Comune',provincia:'Provincia',regione:'Regione',colore_mastello:'Colore mastello',colore_ui_provvisorio:'Colore UI',nome:'Nome',modalita_conferimento:'Modalità di conferimento',descrizione_onboarding:'Descrizione onboarding',totale_voci:'Totale voci',fonte:'Fonte',pagine_pdf:'Pagine PDF',inizio_ora:'Ora inizio',fine_ora:'Ora fine',tipologia:'Tipologia',periodicita:'Periodicità',giorni_riferiti_a:'Giorni riferiti a',cambio_profilo:'Cambio utenza',validita_verificata:'Validità confermata',giorni_di_ritiro:'Giorni di ritiro',comune:'Comune'
   };
   const HEADERS = [
     ['comune','Comune e informazioni generali'],['categorie','Frazioni di raccolta'],['profili_utenza','Profili di utenza'],
@@ -151,7 +151,7 @@
     else body=`<section class="card"><div class="card-head"><h2>Profili di utenza</h2></div>${arrayObjectsField('profili_utenza',d.profili_utenza,['profili_utenza'],0)}</section><section class="card"><div class="card-head"><h2>Frazioni di raccolta</h2></div>${arrayObjectsField('categorie',d.categorie,['categorie'],0)}</section>`;
     return htmlPage('ORGANIZZAZIONE SETTIMANALE','Calendario','Modifica i ritiri per ogni utenza. Ogni giorno può contenere più frazioni; i giorni vuoti non prevedono raccolta.')+tabs+body;
   }
-  function renderDictionary(){return htmlPage('438 VOCI DI PARTENZA','Dizionario dei rifiuti','Trova rapidamente un rifiuto e modifica il nome, la destinazione e i sinonimi. Il conteggio totale viene aggiornato automaticamente quando aggiungi o elimini una voce.')+renderListEditor('Voci del dizionario',['dizionario','voci'],{emptyName:'Rifiuto'});}
+  function renderDictionary(){return htmlPage('CONTENUTI COMUNALI','Dizionario dei rifiuti','Trova rapidamente un rifiuto e modifica il nome, la destinazione e i sinonimi. Il conteggio totale viene aggiornato automaticamente quando aggiungi o elimini una voce.')+renderListEditor('Voci del dizionario',['dizionario','voci'],{emptyName:'Rifiuto'});}
   function renderGuide(){
     const sub=state.sub.guida;
     const tabs=`<div class="toolbar"><div class="section-badges">${[['categorie','Frazioni principali'],['categorie_particolari','Rifiuti particolari'],['istruzioni_generali','Regole generali']].map(([key,title])=>`<button class="button ${sub===key?'button-primary':'button-secondary'} button-small" data-action="sub" data-parent="guida" data-sub="${key}">${title}</button>`).join('')}</div></div>`;
@@ -162,10 +162,14 @@
   }
   function renderAdvice(){return htmlPage('CONTENUTI INFORMATIVI','Consigli utili','I consigli qui modificati alimentano sia la pagina dedicata sia il popup «Lo sapevi?». L’icona è facoltativa: in sua assenza l’app usa un simbolo predefinito.')+renderListEditor('Consigli',['consigli','voci'],{emptyName:'Consiglio',searchable:false});}
   function renderServices(){
-    const key=state.sub.servizi, tabs=`<div class="toolbar"><div class="section-badges">${[['contatti','Contatti'],['ritiro_ingombranti','Ingombranti'],['raee','RAEE'],['centri_raccolta','Centri di raccolta']].map(([s,t])=>`<button class="button ${s===key?'button-primary':'button-secondary'} button-small" data-action="sub" data-parent="servizi" data-sub="${s}">${t}</button>`).join('')}</div></div>`;
+    const key=state.sub.servizi, tabs=`<div class="toolbar"><div class="section-badges">${[['contatti','Contatti'],['moduli','Moduli'],['ritiro_ingombranti','Ingombranti'],['raee','RAEE'],['centri_raccolta','Centri di raccolta']].map(([s,t])=>`<button class="button ${s===key?'button-primary':'button-secondary'} button-small" data-action="sub" data-parent="servizi" data-sub="${s}">${t}</button>`).join('')}</div></div>`;
     let body='';
-    if(Array.isArray(state.data.servizi[key]))body=renderListEditor('Servizi',['servizi',key],{emptyName:'Servizio',searchable:false});
-    else body=`<section class="card"><div class="card-head"><h2>${esc(label(key))}</h2></div>${objectFields(state.data.servizi[key],['servizi',key])}</section>`;
+    if(key==='moduli'){
+      const fields=['istruzioni_modulo_ritiro','istruzioni_modulo_segnalazione'];
+      body=`<section class="card"><div class="card-head"><h2>Testi per i moduli</h2></div><p class="plain-note">Queste istruzioni appaiono sotto «Apri il modulo» nelle schermate Ritiro e Segnalazione. Aggiorna i nomi delle opzioni dopo la conferma del Comune.</p>${fields.map(field=>field in state.data.servizi?renderField(field,state.data.servizi[field],['servizi',field]):`<div class="notice">${fieldLabel(field)} assenti nel JSON. Importa il file dati aggiornato prima di modificarli.</div>`).join('')}</section>`;
+    }
+    else if(Array.isArray(state.data.servizi[key]))body=renderListEditor('Servizi',['servizi',key],{emptyName:'Servizio',searchable:false});
+    else body=`${key==='ritiro_ingombranti'||key==='raee'?'<div class="notice">Questi campi restano nel JSON per compatibilità. Le istruzioni mostrate nelle nuove schermate sono nella scheda Moduli.</div>':''}<section class="card"><div class="card-head"><h2>${esc(label(key))}</h2></div>${objectFields(state.data.servizi[key],['servizi',key])}</section>`;
     return htmlPage('INFORMAZIONI COMUNALI','Servizi comunali','Gestisci contatti, prenotazioni e centri di raccolta. Per la navigazione inserisci coordinate affidabili e mantieni i numeri telefonici senza formattazioni nel JSON.')+tabs+body;
   }
   function renderRecognition(){
@@ -276,6 +280,10 @@
       else d.servizi.contatti.forEach((v,i)=>{if(!v?.nome?.trim()||!v?.telefono?.trim())bad(`servizi.contatti[${i}]`,'Nome e telefono obbligatori.');});
       if(typeof d.servizi.ritiro_ingombranti?.telefono!=='string'||!d.servizi.ritiro_ingombranti.telefono.trim()||typeof d.servizi.ritiro_ingombranti?.descrizione!=='string'||!d.servizi.ritiro_ingombranti.descrizione.trim()||typeof d.servizi.ritiro_ingombranti?.cadenza!=='string'||typeof d.servizi.ritiro_ingombranti?.prenotazione_necessaria!=='boolean')bad('servizi.ritiro_ingombranti','I campi telefono, descrizione, cadenza e prenotazione_necessaria devono essere validi.');
       if(typeof d.servizi.raee?.informazioni!=='string'||!d.servizi.raee.informazioni.trim())bad('servizi.raee','Informazioni RAEE obbligatorie.');
+      for(const field of ['istruzioni_modulo_ritiro','istruzioni_modulo_segnalazione']){
+        if(!(field in d.servizi))warn(`servizi.${field}`,'Testo non presente: importa il JSON aggiornato per modificarlo nella scheda Moduli.');
+        else if(typeof d.servizi[field]!=='string'||!d.servizi[field].trim())bad(`servizi.${field}`,'Le istruzioni del modulo devono essere un testo non vuoto.');
+      }
       if(!Array.isArray(d.servizi.centri_raccolta)||!d.servizi.centri_raccolta.length)bad('servizi.centri_raccolta','Almeno un centro di raccolta è richiesto.');
       else d.servizi.centri_raccolta.forEach((v,i)=>{if(!v?.nome?.trim()||!v?.zona?.trim())bad(`servizi.centri_raccolta[${i}]`,'Nome e zona obbligatori.');});
     }
@@ -294,7 +302,7 @@
         if(typeof item?.materiale!=='string'||!item.materiale.trim())bad(`${key}[${i}]`,'Descrizione materiale obbligatoria.');
       });
     }
-    if(!('data_revision' in d))warn('data_revision','Il campo numerico verrà aggiunto al primo export (revisione 1). La build iOS attuale non usa ancora questo campo.');
+    if(!('data_revision' in d))warn('data_revision','Il campo numerico verrà aggiunto al primo export (revisione 1). Prima di pubblicare verifica di partire dal JSON più recente.');
     return issues;
   }
 
@@ -457,8 +465,8 @@
   async function init(){
     attach();
     if(location.protocol==='file:'){
-      state.commune='pietracatella';replaceData(window.DMS_BUNDLED_DATA,'Copia locale della Fase 7a-fix4');
-      notify('Modalità locale: stai usando la copia inclusa nello ZIP. Per modificare un file aggiornato usa «Importa JSON».','warning');return;
+      state.commune='pietracatella';replaceData(window.DMS_BUNDLED_DATA,'Copia locale inclusa nello ZIP');
+      notify('Modalità locale: stai usando la copia inclusa nello ZIP. Prima di esportare confrontala con il JSON pubblicato e importa quello se più recente.','warning');return;
     }
     try{
       const m=await fetch('../comuni/index.json',{cache:'no-store'});
