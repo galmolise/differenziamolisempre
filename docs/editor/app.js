@@ -18,7 +18,7 @@
   const state = {
     data:null, commune:'pietracatella', cities:[{id:'pietracatella',nome:'Pietracatella',file:'comuni/pietracatella/dati.json'}],
     origin:'', section:'panoramica', sub:{guida:'categorie',servizi:'contatti',riconoscimento:'codici_materiale',calendario:'ritiri'},
-    selected:{}, query:{}, advanced:'comune', dirty:false, undo:[],redo:[], loadWarning:'', problems:[],
+    selected:{}, query:{}, advanced:'comune', dirty:false, undo:[],redo:[], loadWarning:'', problems:[], lastExport:null,
   };
 
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
@@ -44,10 +44,10 @@
   function synchronize(){
     if(Array.isArray(state.data?.dizionario?.voci)) state.data.dizionario.totale_voci=state.data.dizionario.voci.length;
   }
-  function modified(){synchronize();state.dirty=true;updateChrome();}
+  function modified(){synchronize();state.dirty=true;state.lastExport=null;updateChrome();}
   function mutate(fn,{rerender=true}={}){remember();fn();modified();if(rerender)render();}
   function replaceData(next,origin='File importato') {
-    state.data=clone(next);state.undo=[];state.redo=[];state.selected={};state.query={};state.dirty=false;state.origin=origin;
+    state.data=clone(next);state.undo=[];state.redo=[];state.selected={};state.query={};state.dirty=false;state.origin=origin;state.lastExport=null;
     updateChrome();render();
   }
   function updateChrome(){
@@ -123,6 +123,20 @@
     return `<div class="toolbar"><div class="section-badges">${badge(`${items.length} elementi`)}${subtitle?`<span class="plain-note">${esc(subtitle)}</span>`:''}</div>${addBtn}</div><div class="split"><div class="list-panel"><div class="list-header"><span>Elenco</span><span>${filtered.length} risultati</span></div>${searchable?`<div style="padding:10px 10px 3px"><input class="search-input" style="min-width:0;width:100%" placeholder="Cerca..." aria-label="Cerca in ${esc(title)}" data-role="search" data-list="${esc(id)}" value="${esc(q)}"></div>`:''}<div class="item-list">${rows||'<div class="centered-empty">Nessuna corrispondenza.</div>'}${truncated?`<p class="plain-note" style="padding:0 12px">Sono mostrati i primi ${maxList} risultati. Usa la ricerca per gli altri.</p>`:''}</div></div><div class="card detail-panel">${current?`<div class="card-head"><div><h2 class="detail-title">${esc(keyValue(current,selected))}</h2><div class="detail-subtitle">Elemento ${selected+1} di ${items.length}</div></div>${deletable?action('ask-delete','Elimina','button-outlined-danger button-small',`data-path="${pathAttr(path)}" data-index="${selected}"`):''}</div>${isObject(current)?objectFields(current,[...path,selected]):renderField(String(selected),current,[...path,selected])}`:`<div class="centered-empty">Nessun elemento. Seleziona «Nuovo» per aggiungerne uno.</div>`}</div></div>`;
   }
 
+  function renderPublicationGuide(){
+    if(state.lastExport?.commune!==state.commune)return '';
+    const revision=state.lastExport.revision;
+    return `<section class="card" style="margin-bottom:17px"><div class="card-head"><h2>Pubblica il file scaricato</h2>${badge(`revisione ${revision}`)}</div>
+      <p class="plain-note">Il file <strong>dati.json</strong> è stato scaricato sul dispositivo. Apri le due piattaforme e carica lo stesso file in entrambe:</p>
+      <div class="toolbar" style="flex-wrap:wrap;margin:17px 0">
+        <a class="button button-secondary" href="https://github.com/galmolise/differenziamolisempre/tree/main/docs/comuni/pietracatella" target="_blank" rel="noopener noreferrer">Apri cartella GitHub ↗</a>
+        <a class="button button-secondary" href="https://managehosting.aruba.it/" target="_blank" rel="noopener noreferrer">Apri pannello Aruba ↗</a>
+      </div>
+      <div class="plain-note"><strong>GitHub:</strong> nella cartella aperta scegli «Add file → Upload files», sostituisci dati.json e conferma il commit.<br><strong>Aruba:</strong> dopo l’accesso apri il File Manager, vai in <code>differenziamolisempre/comuni/pietracatella/</code> e sostituisci dati.json.</div>
+      <div class="notice" style="margin-top:17px">Questi pulsanti aprono solo i siti di gestione: il caricamento e la conferma restano manuali. Verifica che entrambe le copie pubbliche mostrino la revisione ${revision}.</div>
+    </section>`;
+  }
+
   function renderOverview(){
     const d=state.data, cats=d.categorie||[];
     const valid=validate(d);const errors=valid.filter(x=>x.severity==='error');
@@ -131,7 +145,7 @@
     `<div class="stats"><div class="stat"><div class="stat-icon">▣</div><strong>${esc(d.profili_utenza?.length??0)}</strong><span>Profili di utenza</span></div><div class="stat"><div class="stat-icon">▤</div><strong>${esc(d.dizionario?.voci?.length??0)}</strong><span>Voci del Dizionario</span></div><div class="stat"><div class="stat-icon">✦</div><strong>${esc(d.consigli?.voci?.length??0)}</strong><span>Consigli utili</span></div><div class="stat"><div class="stat-icon">◉</div><strong>${esc((d.riconoscimento?.codici_materiale?.length??0)+(d.riconoscimento?.termini_materiale?.length??0))}</strong><span>Regole riconoscimento</span></div></div>
     <div class="two-cols"><section class="card"><div class="card-head"><h2>File attivo</h2>${badge(`schema ${d.schema_version??'?'}`)}</div><div class="field"><label class="field-label">Comune</label><strong>${esc(d.comune?.nome)}</strong></div><div class="field"><label class="field-label">Origine</label><div>${esc(state.origin)}</div></div><div class="field"><label class="field-label">Revisione numerica</label><div>${esc(d.data_revision??'Non ancora assegnata')}</div></div><div class="field"><label class="field-label">Versione descrittiva</label><div class="plain-note">${esc(d.data_version??'—')}</div></div></section>
     <section class="card"><div class="card-head"><h2>Controllo qualità</h2>${errors.length?badge(`${errors.length} errori`):badge('Nessun errore')}</div><p class="plain-note">I dati vengono validati prima di generare il JSON. Campi o codici non coerenti vengono segnalati, evitando aggiornamenti involontariamente incompatibili.</p><div style="margin:17px 0">${errors.length?`<div class="notice">${errors.length} problema/i bloccante/i. Apri la sezione Validazione.</div>`:`<div class="validation-row good"><span class="marker">✓</span>Struttura principale coerente.</div>`}</div>${action('navigate-validation','Apri validazione','button-secondary')}</section></div>
-    <section class="card"><div class="card-head"><h2>Flusso consigliato</h2></div><div class="plain-note"><strong>1.</strong> Apri una sezione e modifica i contenuti. <strong>2.</strong> Controlla la validazione. <strong>3.</strong> Esporta il JSON aggiornato. <strong>4.</strong> Pubblicalo separatamente sul dominio principale e su GitHub Pages.</div></section>
+    ${renderPublicationGuide()}<section class="card"><div class="card-head"><h2>Flusso consigliato</h2></div><div class="plain-note"><strong>1.</strong> Apri una sezione e modifica i contenuti. <strong>2.</strong> Controlla la validazione. <strong>3.</strong> Esporta il JSON aggiornato. <strong>4.</strong> Usa i collegamenti che compaiono dopo l’esportazione per caricarlo sul dominio principale e su GitHub Pages.</div></section>
     <div class="notice">Questo editor non carica automaticamente le modifiche su Internet e non contiene password né token GitHub. Il file originale rimane invariato finché non decidi di pubblicarne uno nuovo.</div>`;
   }
 
@@ -369,7 +383,7 @@
     // The local draft becomes the exported revision; the server will not be updated.
     remember();state.data.data_revision=next;modified();
     download('dati.json',JSON.stringify(state.data,null,2)+'\n');
-    state.dirty=false;updateChrome();render();notify(`JSON esportato (revisione ${next}). Ricorda di caricarlo separatamente su GitHub e sul dominio.`);
+    state.dirty=false;state.lastExport={commune:state.commune,revision:next};switchSection('panoramica');notify(`JSON esportato (revisione ${next}). Usa i collegamenti in Panoramica per pubblicarlo.`);
   }
   function applyField(el){
     const p=JSON.parse(el.dataset.path),kind=el.dataset.role,old=get(p);let next;
