@@ -1,7 +1,7 @@
 {
   "schema_version": 3,
-  "data_version": "1.0-REV2-CALENDARIO-DIZIONARIO-MODULI",
-  "data_revision": 2,
+  "data_version": "1.0-REV3-REGOLE-MODULI",
+  "data_revision": 3,
   "status": "dati_confermati_per_uso_nell_app_secondo_indicazione_comunale",
   "comune": {
     "nome": "Pietracatella",
@@ -152,18 +152,18 @@
     "regole_speciali_non_automatizzate": [
       {
         "tipo": "festivita",
-        "testo_fonte": "In caso di festività nei giorni feriali, la raccolta sarà effettuata il giorno successivo.",
-        "stato": "verificare_gestione_sovrapposizioni"
+        "testo_fonte": "In caso di festività nei giorni feriali, la raccolta sarà effettuata il giorno successivo. Eventuali variazioni saranno comunicate attraverso gli altri canali del Comune.",
+        "stato": "confermato"
       },
       {
         "tipo": "neve",
         "testo_fonte": "In caso di precipitazioni nevose abbondanti non esporre il mastello.",
-        "stato": "verificare_con_la_guida_pdf"
+        "stato": "confermato"
       },
       {
         "tipo": "pannolini",
-        "testo_fonte": "Per esigenze legate a infanti o anziani: sacchetto chiuso accanto ai mastelli previsti lunedì, mercoledì e venerdì.",
-        "stato": "verificare_applicabilita_ai_profili"
+        "testo_fonte": "In caso di esigenza dovuta alla presenza di infanti e/o anziani è possibile esporre, in un apposito sacchetto chiuso, esclusivamente pannolini e pannoloni il lunedì, mercoledì e venerdì di fianco ai mastelli già previsti.",
+        "stato": "confermato"
       }
     ]
   },
@@ -441,8 +441,7 @@
       "note": [
         "Dopo lo svuotamento i coperchi vengono lasciati aperti per segnalare il servizio effettuato.",
         "I mancati svuotamenti possono essere segnalati al Comune.",
-        "È buona prassi esporre il mastello solo se pieno.",
-        "In caso di neve: secondo la guida esporre al mattino o dopo la pulizia delle strade (discordanza con la foto del calendario)."
+        "È buona prassi esporre il mastello solo se pieno."
       ],
       "fonte": {
         "id": "guida_2016",
@@ -6227,8 +6226,8 @@
         "verificato": true
       }
     ],
-    "istruzioni_modulo_ritiro": "Selezionare la categoria di servizio “Ambiente”; per il ritiro di materiali ingombranti, selezionare il servizio “Raccolta rifiuti ingombranti non pericolosi”; per il ritiro di rifiuti elettronici, selezionare il servizio “Raccolta rifiuti elettronici”.",
-    "istruzioni_modulo_segnalazione": "Selezionare la categoria di servizio “Ambiente”; per segnalare un mancato ritiro, selezionare il servizio “Segnalazione disservizio”; per segnalare l’abbandono di rifiuti, selezionare il servizio “Segnalazione abbandono rifiuti”.",
+    "istruzioni_modulo_ritiro": "Selezionare la categoria di servizio “Ambiente”; per il ritiro di materiali ingombranti, selezionare il servizio “Raccolta rifiuti ingombranti non pericolosi”; per il ritiro di rifiuti elettronici, selezionare il servizio “Raccolta RAEE”.",
+    "istruzioni_modulo_segnalazione": "Selezionare la categoria di servizio “Ambiente”; per segnalare un mancato ritiro, o l’abbandono di rifiuti, selezionare il servizio “Segnalazione disservizio”.",
     "ritiro_ingombranti": {
       "cadenza": "ultimo_sabato_del_mese",
       "prenotazione_necessaria": true,
@@ -6265,16 +6264,13 @@
   "verifiche_aperte": [
     "Precisare orari di esposizione, senza presumere le 21 o le 6",
     "Verificare gestione effettiva dei punti di prossimità fuori centro",
-    "Confermare regole festività e nevicate",
     "Risolvere incongruenze tra schede guida e rifiutario",
     "Guida plastica pp.14-15: piatti e bicchieri compaiono sia in SI sia in NO.",
     "Guida plastica p.14 e rifiutario p.29: carta stagnola indicata sia in plastica/alluminio sia in secco.",
     "Guida p.15 esclude grucce appendiabiti; verificare voce nel rifiutario e attualità.",
-    "Guida p.13 dice neve: esporre al mattino/dopo pulizia; foto calendario dice neve abbondante: non esporre.",
     "Guida p.25 contiene testo storico sull’avvio del servizio; eliminare tempistiche ormai scadute solo dopo revisione editoriale.",
     "Confermare che le utenze fuori centro usino punti di prossimità anziché esposizione serale porta a porta.",
-    "Verificare nel rifiutario i casi potenzialmente rischiosi (aghi/siringhe/vernici/farmaci) prima della pubblicazione.",
-    "Confermare il regime di raccolta pannolini/pannoloni per ciascun profilo."
+    "Verificare nel rifiutario i casi potenzialmente rischiosi (aghi/siringhe/vernici/farmaci) prima della pubblicazione."
   ],
   "archivio_testo": {
     "descrizione": "Testo PDF estratto in ordine nativo per revisione redazionale e confronto (non pronto da mostrare come UI).",
@@ -6426,9 +6422,9 @@
       "gestione_attuale": "nessuno_spostamento_calcolato_automaticamente",
       "override_singole_date_disponibili": false,
       "array_fonte": "calendario.eccezioni_date",
-      "festivita": "foto indica spostamento a giorno successivo, ma non spiega sovrapposizioni; attendere indicazioni ufficiali prima di automatizzare",
-      "neve": "richiede comunicazione effettiva del servizio; non inferire automaticamente dalla previsione del tempo",
-      "pannolini": "non sommati alle frazioni ordinarie senza verifica del profilo e delle condizioni di servizio",
+      "festivita": "Regola generale pubblicata come avviso; nessuno spostamento calcolato automaticamente. Eventuali variazioni sono comunicate tramite altri canali del Comune.",
+      "neve": "Avviso informativo per precipitazioni nevose abbondanti; nessuna inferenza automatica dalle previsioni meteo.",
+      "pannolini": "Indicazione informativa per infanti e/o anziani; non sommata alle frazioni ordinarie né ai promemoria.",
       "ritiro_ingombranti": "non va mescolato nella raccolta ordinaria"
     },
     "esposizione": {
